@@ -1,5 +1,5 @@
 # Water Level Prediction in Tunisian Dams
-![Water Reservoir](Iron_Hack_Water_in_Tunisia/figures/water%20foto.jpg)
+![Water Reservoir](Iron_Hack_Water_in_Tunisia/figures/water_foto.jpg)
 
 This project focuses on predicting water levels in key Tunisian dams using various Machine Learning models...
 
