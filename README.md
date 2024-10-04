@@ -1,145 +1,87 @@
-# Water Level Prediction in Tunisia's Dams
-## Overview
-This project aims to predict water levels in Tunisian dams based on weather data and historical dam data. The prediction is done using several machine learning models, with a focus on improving performance through feature engineering and hyperparameter tuning. The data was cleaned, explored, and analyzed using various statistical and machine learning techniques, resulting in predictive models that may aid in water management efforts in Tunisia.
+# Water Level Prediction in Tunisian Dams
 
-Table of Contents
-Project Overview
-Data Sources
-Installation
-Project Structure
-Data Cleaning
-Exploratory Data Analysis (EDA)
-Feature Engineering
-Model Training & Evaluation
-Hyperparameter Tuning
-Key Visualizations
-Future Work
-How to Run
-Data Sources
-Dam Data: Historical water levels from various dams in Tunisia.
-Weather Data: Daily weather metrics including temperature, precipitation, and wind speed from relevant regions in Tunisia.
-Both datasets were merged on the date field to allow for accurate predictions based on daily weather data.
 
-Installation
-To run the project locally, follow these steps:
+![Water Reservoir](https://github.com/Futuroent/Iron_Hack_Water_in_Tunisia/blob/main/figures/waterfoto.jpg)
 
-Clone the repository:
 
-bash
-Code kopieren
-git clone https://github.com/your-username/Water_Tunisia_Prediction.git
-cd Water_Tunisia_Prediction
-Set up the virtual environment and install the required packages:
+This project focuses on predicting water levels in key Tunisian dams using various Machine Learning models...
 
-bash
-Code kopieren
-conda create --name Water_Tunisia_env python=3.9
-conda activate Water_Tunisia_env
-pip install -r requirements.txt
-Start Jupyter Notebook to run the analysis:
+## Project Overview
 
-bash
-Code kopieren
-jupyter notebook
-Project Structure
-bash
-Code kopieren
-Water_Tunisia_Prediction/
-├── data/
-│   ├── raw/            # Raw data files
-│   ├── clean/          # Cleaned datasets used for analysis
-│   └── merged_data.csv # Final merged dataset
-├── notebooks/
-│   ├── Water_Tunisia_Notebook.ipynb  # Main notebook with analysis
-│   ├── Cleaning_Data.ipynb           # Data cleaning process
-│   ├── EDA_Notebook.ipynb            # Exploratory data analysis
-│   └── Model_Training.ipynb          # Model training and evaluation
-├── functions.py                      # Reusable Python functions
-├── config.yaml                       # Configuration file
-├── requirements.txt                  # Required Python packages
-└── README.md                         # Project README file
-Data Cleaning
-The data cleaning process involved several steps:
+This project focuses on predicting water levels in key Tunisian dams using various Machine Learning models. Water scarcity in Tunisia poses a significant challenge to agriculture, industry, and local communities. By leveraging historical weather data and dam water levels, the goal of this project is to create predictive models that assist in better water management and resource distribution.
 
-Handling Missing Values: Missing values in both the dam and weather datasets were filled using various imputation techniques such as forward filling.
-Date Formatting: The date column was standardized to YYYY-MM-DD format and used as the primary key for merging the datasets.
-Dropping Duplicates: Any duplicate entries were removed to ensure data consistency.
-Outlier Detection: Outliers in water levels and weather metrics were identified and removed using the IQR (Interquartile Range) method.
-Code for cleaning is provided in Cleaning_Data.ipynb.
+## Table of Contents
 
-Exploratory Data Analysis (EDA)
-We performed an extensive EDA to understand relationships between weather conditions and water levels in the dams. Key insights include:
+1. [Project Overview](#Project-Overview)
+2. [Data Collection](#Data-Collection)
+3. [Data Cleaning and Feature Engineering](#Data-Cleaning-and-Feature-Engineering)
+4. [Exploratory Data Analysis (EDA)](#Exploratory-Data-Analysis-EDA)
+5. [Modeling](#Modeling)
+6. [Results and Insights](#Results-and-Insights)
+7. [Conclusion](#Conclusion)
+8. [Tools and Libraries](#Tools-and-Libraries)
 
-Univariate Analysis: Histograms and boxplots were used to explore the distributions of water levels, temperatures, and precipitation.
-Bivariate Analysis: Correlation heatmaps were generated to understand the relationships between various features such as temperature, precipitation, and water levels.
-Multivariate Analysis: Pairplots and 3D scatter plots helped us visualize the relationships between multiple weather features and water levels simultaneously.
-Key insights:
+## Data Collection
 
-Strong correlation between precipitation (prcp) and water levels in several dams.
-High correlation between minimum and maximum temperatures, affecting evaporation and dam levels.
-Feature Engineering
-Several new features were created to enhance model performance:
+### Datasets Used:
+1. **Weather Data:** Including variables like temperature, rainfall, wind speed, and more.
+2. **Dam Water Levels:** Historical water levels from key Tunisian dams.
 
-Date Features: Extracted year, month, and day from the date column to account for seasonality.
-Cumulative Rainfall: A feature for cumulative rainfall was added to capture the effect of prolonged periods of rain on water levels.
-Daily Temperature Change: Difference between daily maximum and minimum temperatures to account for the effects of sudden temperature changes.
-These features were critical in improving model accuracy, as they capture long-term weather effects on water storage.
+These datasets span from 2014 to 2019, providing a detailed view of water storage changes over time.
 
-Model Training & Evaluation
-We experimented with various machine learning models for predicting water levels, including:
+## Data Cleaning and Feature Engineering
 
-Linear Regression: Simple baseline model.
+### Data Cleaning:
+- Handled missing values using interpolation techniques.
+- Removed outliers for consistent analysis.
+- Aligned and formatted all datasets to ensure compatibility.
 
-Mean Squared Error (MSE): 1840
-R² Score: -0.07
-Interpretation: Model had low predictive power, not accounting for non-linear relationships.
-Random Forest Regressor: Ensemble model to capture complex interactions between features.
+### Feature Engineering:
+- Created Lag features (Lag 1, Lag 7, Lag 30) to capture the impact of rainfall from previous days.
+- Added seasonal features like month and season to capture long-term weather patterns affecting dam levels.
 
-MSE: 1617
-R² Score: -0.08
-Interpretation: Improved but still not sufficient for accurate predictions.
-Gradient Boosting Regressor: Boosted model to further refine predictions.
+## Exploratory Data Analysis (EDA)
 
-MSE: 1539
-R² Score: -0.03
-Interpretation: Better at handling non-linearities, but further tuning was needed.
-Hyperparameter Tuning
-We used Grid Search and Cross-Validation to optimize hyperparameters for the Gradient Boosting and XGBoost models.
+The EDA revealed key patterns in the data:
+- Strong correlations between rainfall and water levels.
+- Seasonal trends where water levels are higher during rainy seasons.
+- Weak correlations between temperature and water levels.
 
-Gradient Boosting Best Parameters:
-yaml
-Code kopieren
-learning_rate: 0.01
-max_depth: 5
-n_estimators: 100
-XGBoost Best Parameters:
-yaml
-Code kopieren
-learning_rate: 0.01
-max_depth: 7
-min_child_weight: 5
-n_estimators: 100
-These parameters significantly improved the model's predictive performance:
+Visualizations, including heatmaps and scatterplots, highlighted these relationships and guided feature selection.
 
-XGBoost MSE: 2014
-R² Score: -0.34
-Key Visualizations
-Actual vs Predicted Water Levels: Visualized how closely the predicted water levels matched the actual values across different models.
-Residual Plots: Showed the residuals for each model, helping us understand where the models made significant errors.
-SHAP Summary Plot: Used SHAP values to interpret feature importance, revealing that temperature and precipitation were the most influential features.
-Future Work
-To further improve the model, we propose the following next steps:
+## Modeling
 
-Incorporating External Data: Using real-time weather data and water usage patterns for more accurate predictions.
-Real-Time Monitoring: Building an app that allows water managers to monitor dam levels in real-time.
-Seasonal Adjustment: Implementing more advanced time-series techniques like ARIMA to capture seasonal patterns in water levels.
-Cloud Deployment: Deploying the model using a cloud-based platform like AWS for real-time predictions and monitoring.
-How to Run
-Clone the repository.
-Install dependencies using the requirements.txt file.
-Run the Jupyter notebooks:
-Data Cleaning: Cleaning_Data.ipynb
-EDA: EDA_Notebook.ipynb
-Model Training: Model_Training.ipynb
-Ensure that all the cleaned datasets are located in the data/clean/ folder.
+We experimented with three main models:
+1. **Linear Regression:** Baseline model, performed poorly with high errors.
+2. **Random Forest Regressor:** Achieved the best performance with an R² of 0.97 and low error rates.
+3. **Gradient Boosting:** Slightly less accurate than Random Forest, but still a good performer.
 
+Hyperparameter tuning was applied to improve model performance, with Random Forest showing the best results after optimization.
+
+## Results and Insights
+
+- **Random Forest Regressor** outperformed other models with an accuracy of 97%.
+- Feature Importance analysis highlighted Lag 1, RMIL, and SILIANA as key contributors to water level predictions.
+- SHAP values provided further insights into feature impact on the model's predictions.
+
+## Conclusion
+
+This project successfully developed a robust predictive model for water levels in Tunisian dams. The Random Forest model, with an R² of 0.97, demonstrated strong predictive performance, especially when using lag features and regional data. This model can assist local governments in managing water resources and implementing timely interventions in the face of water scarcity.
+
+Future work can focus on:
+- Integrating real-time data for continuous model updates.
+- Exploring more advanced models like LSTM for time-series forecasting.
+
+## Tools and Libraries
+
+- **Python:** Core programming language used for data analysis and modeling.
+- **Pandas:** Used for data manipulation and preprocessing.
+- **Matplotlib/Seaborn:** Used for creating visualizations and exploring data patterns.
+- **Scikit-learn:** Machine learning library for model training and evaluation.
+- **SHAP:** Used for model explainability and feature importance analysis.
+
+## How to Run the Project
+
+1. Install the required libraries:  
+   ```bash
+   pip install pandas matplotlib seaborn scikit-learn shap
