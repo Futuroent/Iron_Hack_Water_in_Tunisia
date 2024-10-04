@@ -8,7 +8,6 @@ This project focuses on predicting water levels in key Tunisian dams using vario
 Presentation Link :
 https://www.canva.com/design/DAGR75r4RvA/IRPkAUqAOGNcauXXdemeIA/edit?utm_content=DAGR75r4RvA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
-
 ## Project Overview
 
 This project focuses on predicting water levels in key Tunisian dams using various Machine Learning models. Water scarcity in Tunisia poses a significant challenge to agriculture, industry, and local communities. By leveraging historical weather data and dam water levels, the goal of this project is to create predictive models that assist in better water management and resource distribution.
