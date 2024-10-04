@@ -1,8 +1,29 @@
 data_paths:
-  raw_data: "path/to/raw_data.csv"
-  cleaned_data: "path/to/cleaned_data.csv"
-  model_output: "path/to/model_output.pkl"
+  raw_data: './data/raw_data.csv'
+  cleaned_data: './data/cleaned_data.csv'
+  model_output: './models/output_model.pkl'
+  visualization_output: './figures/plot.png'
 
-random_forest_params:
+model_params:
+  test_size: 0.2
+  random_state: 42
   n_estimators: 100
   max_depth: 10
+  learning_rate: 0.01
+
+hyperparameters:
+  random_forest:
+    n_estimators: [100, 200, 300]
+    max_depth: [10, 20, 30]
+  gradient_boosting:
+    learning_rate: [0.01, 0.1, 0.2]
+    n_estimators: [100, 150, 200]
+
+feature_importance:
+  importance_output: './output/feature_importance.csv'
+  shap_values_output: './output/shap_values.png'
+
+project_info:
+  project_name: "Water Level Prediction in Tunisian Dams"
+  author: "Mehdi Sahraoui"
+  date: "2024-10-04"
